@@ -18,7 +18,7 @@ class EnterpriseRepoTests(unittest.TestCase):
     def test_no_production_writes_enabled(self):
         self.assertFalse(POLICY["production_database_writes_allowed"])
     def test_no_claim_of_google_indexing(self):
-        self.assertIn("not been confirmed", (ROOT/"docs/GOOGLE_INDEXING.md").read_text())
+        self.assertIn("not been confirmed", (ROOT/"docs/GOOGLE_INDEXING.md").read_text().replace("**", ""))
     def test_five_mermaid_diagrams(self):
         self.assertGreaterEqual((ROOT/"docs/DIAGRAMS.md").read_text().count("```mermaid"),5)
     def test_founder_links_to_real_github(self):
@@ -37,5 +37,5 @@ class EnterpriseRepoTests(unittest.TestCase):
     def test_public_symbol_reused(self):
         self.assertIn("imperial-core-emblem.webp",POLICY["public_corporate_symbol"])
     def test_val_town_marked_unverified(self):
-        self.assertIn("NOT A COMPLETE LIVE VAL TOWN ACCOUNT AUDIT",(ROOT/"docs/VAL_TOWN_RECOVERY.md").read_text())
+        self.assertIn("NOT A COMPLETE LIVE VAL TOWN ACCOUNT AUDIT",(ROOT/"docs/VAL_TOWN_RECOVERY.md").read_text().replace("**", ""))
 if __name__=="__main__": unittest.main()
