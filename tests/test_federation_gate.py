@@ -215,6 +215,50 @@ class FederationGateTests(unittest.TestCase):
         self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
                          "AUTHORITY_EXPIRED_OR_REVOKED")
 
+    def test_removed_membership_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        self.state.memberships.clear()
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "SCOPE_REVOKED")
+
+    def test_removed_orchestrator_route_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        self.state.orchestrator_routes.clear()
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "SCOPE_REVOKED")
+
+    def test_revoked_agent_capability_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        self.state.agent_scopes.clear()
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "SCOPE_REVOKED")
+
+    def test_guardian_revoke_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        self.state.guardian_releases.clear()
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "GUARDIAN_REVOKED")
+
+    def test_expired_approval_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        approval = self.state.approvals[self.task.digest()]
+        self.state.approvals[self.task.digest()] = replace(approval, expires_at=1090)
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "AUTHORITY_EXPIRED_OR_REVOKED")
+
+    def test_revoked_approval_verification_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        approval = self.state.approvals[self.task.digest()]
+        self.state.approvals[self.task.digest()] = replace(approval, trusted_verification=False)
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "AUTHORITY_EXPIRED_OR_REVOKED")
+
+    def test_deactivated_workspace_blocks_commit(self):
+        self.gate.submit(self.task, now=1000)
+        self.state.active_workspaces.clear()
+        self.assertEqual(self.gate.record_result(self.task, self.payload, now=1100).reason,
+                         "SCOPE_REVOKED")
+
     def test_qa_result_cannot_be_recorded_twice(self):
         self.gate.submit(self.task, now=1000)
         self.gate.record_result(self.task, self.payload, now=1100)
