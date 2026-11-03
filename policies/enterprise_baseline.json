@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "owner_display_role": "Founder · Owner · CEO",
+  "cloud_region": {
+    "provider": "Supabase",
+    "region": "eu-central-1",
+    "location": "Frankfurt, Germany",
+    "scope": "DATABASE_PROJECT_REGION_ONLY"
+  },
+  "enterprise_controls": [
+    "AI Passport",
+    "Enterprise Skills",
+    "Guardian Core",
+    "Approval Gateway",
+    "Audit Ledger",
+    "Zero Trust",
+    "Public/Private Boundary",
+    "Owner Kill Switch",
+    "CRYPTO IMPERIAL Ecosystem Boundary"
+  ],
+  "architecture": "Federated Multi-Orchestrator Architecture",
+  "blocked_claims": [
+    "all_cloud_services_in_frankfurt",
+    "owner_authorized_by_self_report",
+    "payment_confirmed_without_provider",
+    "live_workers_from_registry_count",
+    "google_indexing_guaranteed"
+  ],
+  "public_corporate_symbol": "https://raw.githubusercontent.com/oromaskevic23-cmd/oromaskevic23-cmd/main/assets/imperial-core-emblem.webp",
+  "google_site": "https://oromaskevic23-cmd.github.io/Supabase/",
+  "production_database_writes_allowed": false
+}
