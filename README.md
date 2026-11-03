@@ -41,6 +41,10 @@ The implementation follows a **federated Multi-Orchestrator Architecture**, not 
 | [Security Advisor runbook](docs/SECURITY_ADVISOR_RUNBOOK.md) | Verified 2026-11-03 alerts, remediation gates, and proof limits |
 | [Access review SQL](ops/readonly_access_matrix.sql) | Metadata-only RLS, grants, view and privileged-function inventory |
 | [Offline advisor gate](scripts/advisor_gate.py) | Tested, fail-closed parser for sanitized Advisor evidence |
+| [Federated dispatch contract](docs/FEDERATED_DISPATCH_CONTRACT.md) | Executable lab gate for HANTER → orchestrator → NCA with fail-closed controls |
+| [Tenant isolation inspection](docs/TENANT_ISOLATION_REPORT_2026-11-04.md) | Read-only inspection of eight protected CRM/control tables and key constraints |
+| [Production activation gates](docs/PRODUCTION_ACTIVATION_GATES.md) | Explicit Owner/Passport/QA/security blockers before real worker execution |
+| [Workspace contract SQL](ops/readonly_workspace_contract.sql) | Non-mutating inspection of workspace-specific database access rules |
 | [Evidence register](docs/EVIDENCE_REGISTER.md) | Verified, partially verified and planned capabilities |
 | [Val Town recovery](docs/VAL_TOWN_RECOVERY.md) | Two-month historical reconstruction and open questions |
 | [Operations](docs/RUNBOOK.md) | Release, rollback and production gates |
@@ -50,9 +54,13 @@ The implementation follows a **federated Multi-Orchestrator Architecture**, not 
 | [Safe SQL inventory](ops/readonly_inventory.sql) | SELECT-only PostgreSQL exploration |
 | [Validation](scripts/validate_repo.py) | No-network repository security checks |
 
-## Evidence-first status · 2026-11-03
+## Evidence-first status · 2026-11-04
 
 The connected Supabase project has been observed in `eu-central-1`, identified by Supabase as **Central EU (Frankfurt)**. A separate read-only audit of CRM-SOFFT observed **11 workspaces** marked `CONFIGURING`, **21 registered NCA records** marked `REGISTERED_NOT_AUTHORIZED`, and **no payment or revenue-ledger rows in the tables checked**. These facts do not establish live workers or overall company revenue.
+
+The live catalog inspection found eight selected CRM-SOFFT/control tables with RLS enabled, no policies and no direct `anon`/`authenticated` schema/table permissions. The CRM database already has workspace-scoped task and idempotency constraints. This does **not** certify production tenant isolation or privileged API safety.
+
+The new [offline federated dispatch gate](scripts/federation_gate.py) tests workspace isolation, role-scoped routing, passport/approval/Guardian conditions, retries, Kill Switch and independent QA. Its default production mode refuses all dispatch. **No real AI Passport signature verification, Owner key enrollment, managed NCA execution or permanent Audit Ledger is claimed.**
 
 **Never publish** client records, passports, private keys, bearer tokens, Supabase service credentials, face templates or unapproved security findings in this repository.
 

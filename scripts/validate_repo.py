@@ -18,6 +18,8 @@ def check():
     for relative in ("README.md","docs/ARCHITECTURE.md","docs/DIAGRAMS.md",
                      "docs/FRANKFURT.md","docs/DATABASE_DOMAINS.md",
                      "docs/SECURITY_BASELINE.md","docs/SECURITY_ADVISOR_RUNBOOK.md","docs/EVIDENCE_REGISTER.md",
+                     "docs/FEDERATED_DISPATCH_CONTRACT.md","docs/TENANT_ISOLATION_REPORT_2026-11-04.md",
+                     "docs/PRODUCTION_ACTIVATION_GATES.md",
                      "docs/VAL_TOWN_RECOVERY.md","docs/GOOGLE_INDEXING.md",
                      "docs/RUNBOOK.md","site/index.html",
                      "site/founder/index.html","site/frankfurt/index.html"):
@@ -53,7 +55,8 @@ def check():
     robots=(PAGES/"robots.txt").read_text()
     if f"Sitemap: {BASE}sitemap.xml" not in robots:
         raise AssertionError("Sitemap not discoverable")
-    for sql_path in ("ops/readonly_inventory.sql", "ops/readonly_access_matrix.sql"):
+    for sql_path in ("ops/readonly_inventory.sql", "ops/readonly_access_matrix.sql",
+                     "ops/readonly_workspace_contract.sql"):
         sql=(ROOT/sql_path).read_text()
         statements=re.sub(r"(?m)^\s*--.*$","",sql).strip().split(";")
         for part in statements:

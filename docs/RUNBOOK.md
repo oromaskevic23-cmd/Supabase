@@ -12,6 +12,10 @@ The current Supabase Advisor snapshot contains a **security WARN**, so the [offl
 6. Execute minimal migration with independent validation and transactional rollback plan.
 7. Re-check frontend, private server, HANTER, CRM-SOFFT, Audit Ledger and paid-service/billing constraints. Maintain FREE_ONLY.
 
+## Federated NCA release
+
+Use the [production activation checklist](PRODUCTION_ACTIVATION_GATES.md), [federation gate contract](FEDERATED_DISPATCH_CONTRACT.md) and [tenant isolation inspection](TENANT_ISOLATION_REPORT_2026-11-04.md). The repository's Python dispatcher is **lab-only** and intentionally denies production. Do not enable a real worker based on green CI. Re-check workspace authority, Guardian/Approval status and Kill Switch at both dispatch and result acceptance.
+
 ## Incident response
 
 Deny new privileged jobs, revoke affected credentials, stop scoped workers and preserve sanitized evidence. **Do not claim remote shutdown** unless logs prove worker termination. Restore only after approved incident review and independent checks.
