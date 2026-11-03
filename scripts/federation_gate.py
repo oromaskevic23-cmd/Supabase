@@ -228,13 +228,34 @@ class FederatedDispatchGate:
             return self._decision("DUPLICATE", "RESULT_ALREADY_RECORDED", digest)
         if self.state.stop_all or task.agent_id in self.state.stopped_agents:
             return self._decision("DENIED", "OWNER_KILL_SWITCH", digest)
+        if (
+            task.workspace_id not in self.state.active_workspaces
+            or (task.workspace_id, task.actor_id) not in self.state.memberships
+            or (task.workspace_id, task.orchestrator_id) not in self.state.orchestrator_routes
+            or (task.workspace_id, task.orchestrator_id, task.agent_id, task.capability)
+            not in self.state.agent_scopes
+        ):
+            return self._decision("DENIED", "SCOPE_REVOKED", digest)
+        if digest not in self.state.guardian_releases:
+            return self._decision("DENIED", "GUARDIAN_REVOKED", digest)
         passport = self.state.passports.get(digest)
         approval = self.state.approvals.get(digest)
         if (
             task.expires_at <= now
             or digest in self.state.revoked_passports
-            or passport is None or passport.expires_at <= now
-            or approval is None or approval.expires_at <= now
+            or passport is None
+            or passport.trusted_verification is not True
+            or passport.task_digest != digest
+            or passport.workspace_id != task.workspace_id
+            or passport.agent_id != task.agent_id
+            or not _valid_time(passport.expires_at)
+            or passport.expires_at <= now
+            or approval is None
+            or approval.trusted_verification is not True
+            or approval.task_digest != digest
+            or approval.workspace_id != task.workspace_id
+            or not _valid_time(approval.expires_at)
+            or approval.expires_at <= now
         ):
             return self._decision("DENIED", "AUTHORITY_EXPIRED_OR_REVOKED", digest)
         if not isinstance(payload, bytes):
