@@ -2,7 +2,7 @@
 
 **Time window:** 2026-09-03 through 2026-11-03, inclusive.  
 **Account historically reviewed:** `oromaskevic23`.  
-**Report class:** PUBLIC SANITIZED EXECUTIVE SUMMARY.  
+**Report class:** PUBLIC SANITIZED EXECUTIVE SUMMARY — **NOT A COMPLETE LIVE VAL TOWN ACCOUNT AUDIT**.  
 **Budget:** FREE_ONLY. **No Val Town account writes or paid upgrades.**
 
 > **Evidence boundary:** This report reconstructs historical connected-session checks and selected publicly indexed Val Town pages. **It is not a current complete account inventory or a live two-month telemetry replay.** The authenticated Val Town connector was not available to enumerate vals, inspect logs, branches or stored data as of 2026-11-03.
