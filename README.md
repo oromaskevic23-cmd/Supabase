@@ -38,6 +38,9 @@ The implementation follows a **federated Multi-Orchestrator Architecture**, not 
 | [Frankfurt region](docs/FRANKFURT.md) | Verified Supabase region and location boundaries |
 | [Database domains](docs/DATABASE_DOMAINS.md) | CRM, control-plane and schema responsibilities |
 | [Zero Trust security](docs/SECURITY_BASELINE.md) | RLS, authorization and migration acceptance |
+| [Security Advisor runbook](docs/SECURITY_ADVISOR_RUNBOOK.md) | Verified 2026-11-03 alerts, remediation gates, and proof limits |
+| [Access review SQL](ops/readonly_access_matrix.sql) | Metadata-only RLS, grants, view and privileged-function inventory |
+| [Offline advisor gate](scripts/advisor_gate.py) | Tested, fail-closed parser for sanitized Advisor evidence |
 | [Evidence register](docs/EVIDENCE_REGISTER.md) | Verified, partially verified and planned capabilities |
 | [Val Town recovery](docs/VAL_TOWN_RECOVERY.md) | Two-month historical reconstruction and open questions |
 | [Operations](docs/RUNBOOK.md) | Release, rollback and production gates |

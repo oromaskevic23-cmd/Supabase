@@ -17,7 +17,7 @@ def check():
         raise AssertionError("Federated architecture missing")
     for relative in ("README.md","docs/ARCHITECTURE.md","docs/DIAGRAMS.md",
                      "docs/FRANKFURT.md","docs/DATABASE_DOMAINS.md",
-                     "docs/SECURITY_BASELINE.md","docs/EVIDENCE_REGISTER.md",
+                     "docs/SECURITY_BASELINE.md","docs/SECURITY_ADVISOR_RUNBOOK.md","docs/EVIDENCE_REGISTER.md",
                      "docs/VAL_TOWN_RECOVERY.md","docs/GOOGLE_INDEXING.md",
                      "docs/RUNBOOK.md","site/index.html",
                      "site/founder/index.html","site/frankfurt/index.html"):
@@ -53,12 +53,13 @@ def check():
     robots=(PAGES/"robots.txt").read_text()
     if f"Sitemap: {BASE}sitemap.xml" not in robots:
         raise AssertionError("Sitemap not discoverable")
-    sql=(ROOT/"ops/readonly_inventory.sql").read_text()
-    statements=re.sub(r"(?m)^\s*--.*$","",sql).strip().split(";")
-    for part in statements:
-        cleaned=part.strip()
-        if cleaned and not cleaned.upper().startswith("SELECT "):
-            raise AssertionError("Forbidden SQL: inventory must be SELECT-only")
+    for sql_path in ("ops/readonly_inventory.sql", "ops/readonly_access_matrix.sql"):
+        sql=(ROOT/sql_path).read_text()
+        statements=re.sub(r"(?m)^\s*--.*$","",sql).strip().split(";")
+        for part in statements:
+            cleaned=part.strip()
+            if cleaned and not cleaned.upper().startswith("SELECT "):
+                raise AssertionError(f"Forbidden SQL: {sql_path} must be SELECT-only")
     if POLICY["production_database_writes_allowed"] is not False:
         raise AssertionError("Production writes must be denied")
     print("IMPERIAL_SUPABASE_ENTERPRISE_SOURCE_PASS: founder roles, five diagrams, Frankfurt, sitemap, SEO, source controls, SELECT-only SQL")

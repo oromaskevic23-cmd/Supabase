@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-03T20:58:03Z",
+  "security": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 68
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "level": "WARN",
+      "count": 1
+    }
+  ],
+  "performance": [
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "count": 52
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "count": 27
+    }
+  ]
+}

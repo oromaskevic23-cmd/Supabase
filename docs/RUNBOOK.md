@@ -2,6 +2,8 @@
 
 ## Before applying migrations
 
+The current Supabase Advisor snapshot contains a **security WARN**, so the [offline release gate](SECURITY_ADVISOR_RUNBOOK.md) reports `BLOCK`. Re-run the live Advisors and review affected objects under Owner authority before any release; a passing source CI job is not an approval to deploy.
+
 1. Confirm **specific** Supabase project and Frankfurt region; select isolated environment.
 2. Obtain authorized Owner approval; freeze scope and record a rollback path.
 3. Export metadata-only schema, permissions and dependencies via [safe SQL](../ops/readonly_inventory.sql).

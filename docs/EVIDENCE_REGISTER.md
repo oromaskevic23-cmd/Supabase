@@ -7,6 +7,8 @@
 | CRM-SOFFT | 11 workspace records, 21 registered NCA records | Observed counts | All records checked as not production-authorized |
 | Revenue database | 0 rows in checked `payment_records` and `revenue_ledger` tables | Observed counts | This does not establish every revenue channel |
 | RLS | Risks and role grants investigated | Partial security review | Independent penetration/tenant isolation |
+| Supabase Advisor (2026-11-03, 20:58 UTC) | 68 policy-less RLS tables (INFO), 1 authenticated-executable security-definer function (WARN), 52 unindexed FKs, 27 unused indexes | Observed metadata; historical snapshot | Review the warned function privately and verify authorization; no production fix applied |
+| Offline Advisor gate | Source, sample snapshot and unit tests committed to this repository | Tested by CI once green; snapshot reports BLOCK | Does not imply production security or automatically repair the database |
 | HANTER ↔ NCA | Lab prototypes and CI in other repos | Lab evidence | Privileged production workers unverified |
 | Val Town | Historical inventories and recovery references | Historical only | Live account/project/traces inventory unavailable |
 | Public Pages | Static site + workflow in this repository | Build candidate | Published URL and search crawl to be independently confirmed |

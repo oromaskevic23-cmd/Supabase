@@ -24,3 +24,8 @@ CRM quote ≠ invoice ≠ signed payment receipt ≠ `PAYMENT_CONFIRMED`. Settle
 ## CI rule
 
 This repository's CI can prove documentation consistency and offline code checks; it cannot certify a production Supabase project, external provider or live NCA worker. See [evidence register](EVIDENCE_REGISTER.md).
+
+
+## Current review gate
+
+See [Supabase Security Advisor runbook](SECURITY_ADVISOR_RUNBOOK.md) for the 2026-11-03 evidence snapshot and the callable privileged RPC review. [Catalog-only SQL](../ops/readonly_access_matrix.sql) and the [offline snapshot validator](../scripts/advisor_gate.py) do not mutate production. A security WARN remains open; passing GitHub CI is not production security certification.
