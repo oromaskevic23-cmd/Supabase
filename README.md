@@ -1,5 +1,7 @@
 # IMPERIAL Core — Supabase Enterprise Infrastructure
 
+![Supabase × IMPERIAL Core — integration banner](assets/supabase-imperial-core-integration.png)
+
 ![Canonical IMPERIAL Core symbol](https://raw.githubusercontent.com/oromaskevic23-cmd/oromaskevic23-cmd/main/assets/imperial-core-emblem.webp)
 
 **Frankfurt, Germany · Central EU · Supabase region `eu-central-1`**  
