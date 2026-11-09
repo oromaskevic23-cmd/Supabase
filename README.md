@@ -5,6 +5,8 @@
 ![Canonical IMPERIAL Core symbol](https://raw.githubusercontent.com/oromaskevic23-cmd/oromaskevic23-cmd/main/assets/imperial-core-emblem.webp)
 
 **Frankfurt, Germany · Central EU · Supabase region `eu-central-1`**  
+<img src="https://raw.githubusercontent.com/oromaskevic23-cmd/oromaskevic23-cmd/main/assets/alexander-romaskevich-portrait-20261110.jpg" alt="Alexander Nikolaevich Romaskevich, Founder, Owner and CEO of IMPERIAL Core" width="160" />
+
 **Alexander Nikolaevich Romaskevich — Founder · Owner · CEO**  
 **RomaskevicH · FREE_ONLY · Architecture Before Implementation**
 
